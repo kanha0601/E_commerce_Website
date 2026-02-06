@@ -12,10 +12,12 @@ import Login from './pages/public/Login';
 import Register from './pages/public/Register';
 import Profile from './pages/user/Profile';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import Contact from './pages/public/Contact';
 
 // Route Guards
 import ProtectedRoute from './route/ProtectedRoute';
 import PublicRoute from './route/PublicRoute';
+
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="product" element={<Product />} />
         
         {/* Only accessible if NOT logged in */}
         <Route 
