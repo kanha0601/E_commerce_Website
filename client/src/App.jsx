@@ -1,3 +1,4 @@
+import Cart from "./pages/user/Cart";
 import './App.css'
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -12,11 +13,12 @@ import Login from './pages/public/Login';
 import Register from './pages/public/Register';
 import Profile from './pages/user/Profile';
 import AdminDashboard from './pages/admin/AdminDashboard';
-import Contact from './pages/public/Contact';
 
 // Route Guards
 import ProtectedRoute from './route/ProtectedRoute';
 import PublicRoute from './route/PublicRoute';
+import Contact from "./pages/public/Contact";
+import Products from "./pages/public/Products";
 
 
 function App() {
@@ -26,8 +28,14 @@ function App() {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="product" element={<Product />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="/" element={<Contact />}></Route>
+        <Route path="products" element={<Products />}></Route>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+
+        
+
         
         {/* Only accessible if NOT logged in */}
         <Route 
