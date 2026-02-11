@@ -9,14 +9,14 @@ return (
 <div className="bg-gray-50 min-h-screen">
 
 {/* Hero Section */}  
-  <div className="bg-gradient-to-r from-orange-500 to-pink-500 text-white">  
+  <div className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white">  
     <div className="max-w-7xl mx-auto px-6 py-24 text-center">  
 
-      <h1 className="text-5xl md:text-6xl font-extrabold mb-6">  
+      <h1 className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">  
         {homeData.hero.title}  
       </h1>  
 
-      <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">  
+      <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto drop-shadow-md">  
         {homeData.hero.subtitle}
       </p>  
 
@@ -24,7 +24,7 @@ return (
 
         <Link  
           to="/products"  
-          className="bg-white text-orange-600 px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition"  
+          className="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 shadow-lg"  
         >  
           {homeData.hero.shopBtn} 
         </Link>  
@@ -33,7 +33,7 @@ return (
           {user ? (  
             <Link  
               to="/profile"  
-              className="border border-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-white hover:text-orange-600 transition"  
+              className="border border-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition transform hover:scale-105"  
             >  
               My Account  
             </Link>  
@@ -42,7 +42,7 @@ return (
             
               <Link  
                 to="/register"  
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"  
+                className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition transform hover:scale-105 shadow-md"  
               >  
                 {homeData.hero.registerBtn}  
               </Link>  
@@ -67,13 +67,13 @@ return (
   {homeData.features.map((item) => (
     <div
       key={item.id}
-      className="bg-white p-8 rounded-xl shadow hover:shadow-lg transition"
+      className="bg-gradient-to-tr from-purple-100 to-indigo-100 p-8 rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2"
     >
-      <h3 className="text-xl font-bold mb-3">
+      <h3 className="text-xl font-bold mb-3 text-purple-700">
         {item.title}
       </h3>
 
-      <p className="text-gray-600">
+      <p className="text-gray-700">
         {item.desc}
       </p>
     </div>
@@ -82,19 +82,19 @@ return (
 </div>
 </div>
   {/* Call To Action */}  
-  <div className="bg-gray-900 text-white py-20 text-center">  
+  <div className="bg-gradient-to-r from-purple-400 to-blue-500 text-white py-20 text-center">  
 
-    <h2 className="text-4xl font-bold mb-4">  
+    <h2 className="text-4xl font-bold mb-4 drop-shadow-md">  
       {homeData.cta.title} 
     </h2>  
 
-    <p className="text-lg mb-8 text-gray-300">  
+    <p className="text-lg mb-8 text-white/90 drop-shadow-sm">  
       {homeData.cta.desc}  
     </p>  
 
     <Link  
       to="/products"  
-      className="bg-orange-500 px-10 py-3 rounded-full text-lg font-semibold hover:bg-orange-600 transition"  
+      className="bg-white text-blue-600 px-10 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105 shadow-lg"  
     >  
       {homeData.cta.btn}
     </Link>  
