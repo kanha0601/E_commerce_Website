@@ -1,24 +1,66 @@
 import React from "react";
+import aboutData from "../../data/aboutData";
 
 const About = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-4 text-center">
-      
-      <h1 className="text-5xl font-bold mb-6 text-gray-800">
-        About Our Store
-      </h1>
+    <div className="min-h-screen bg-gray-100 px-6 py-16">
 
-      <p className="text-lg text-gray-600 max-w-2xl mb-6">
-        Welcome to our e-commerce website! We provide the best products and a smooth shopping experience for all our customers.
-      </p>
+      {/* Title */}
+      <div className="text-center mb-12">
+        <h1 className="text-5xl font-bold text-gray-800 mb-3">
+          {aboutData.title}
+        </h1>
 
-      <p className="text-lg text-gray-600 max-w-2xl mb-6">
-        Our mission is to make online shopping fast, safe, and enjoyable. We are committed to providing quality products at affordable prices.
-      </p>
+        <p className="text-xl text-gray-600">
+          {aboutData.subtitle}
+        </p>
+      </div>
 
-      <p className="text-lg text-gray-600 max-w-2xl">
-        Join us today and experience the convenience of shopping from home with reliable customer support.
-      </p>
+      {/* Description */}
+      <div className="max-w-3xl mx-auto text-center mb-12">
+        <p className="text-lg text-gray-700">
+          {aboutData.description}
+        </p>
+      </div>
+
+      {/* Mission & Vision */}
+      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 mb-12">
+
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h2 className="text-2xl font-bold mb-3">🎯 Mission</h2>
+          <p className="text-gray-600">
+            {aboutData.mission}
+          </p>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h2 className="text-2xl font-bold mb-3">🚀 Vision</h2>
+          <p className="text-gray-600">
+            {aboutData.vision}
+          </p>
+        </div>
+
+      </div>
+
+      {/* Stats */}
+      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+
+        {aboutData.stats.map((item) => (
+          <div
+            key={item.id}
+            className="bg-white p-5 rounded-lg shadow"
+          >
+            <h3 className="text-3xl font-bold text-blue-600">
+              {item.value}
+            </h3>
+
+            <p className="text-gray-600">
+              {item.label}
+            </p>
+          </div>
+        ))}
+
+      </div>
 
     </div>
   );
