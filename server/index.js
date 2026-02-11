@@ -17,10 +17,12 @@ app.use(express.json());
 // Routes
 const authRoutes = require('./route/authRoutes');
 const contactRoutes = require('./route/contactRoutes');
+const productRoutes = require('./route/ProductRoute');
 
 // Mount Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/product', productRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running...');

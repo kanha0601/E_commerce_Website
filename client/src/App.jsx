@@ -17,6 +17,9 @@ import Contact from './pages/public/Contact';
 // Route Guards
 import ProtectedRoute from './route/ProtectedRoute';
 import PublicRoute from './route/PublicRoute';
+import Product from './pages/public/Product';
+import AdminContact from './pages/admin/AdminContact';
+
 
 
 function App() {
@@ -61,6 +64,7 @@ function App() {
       {/* Admin Routes with Admin Layout */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<AdminDashboard />} />
+        <Route path='Contact' element={<AdminContact />} />
       </Route>
       
       {/* Fallback */}
@@ -68,5 +72,6 @@ function App() {
     </Routes>
   );
 }
+
 
 export default App;

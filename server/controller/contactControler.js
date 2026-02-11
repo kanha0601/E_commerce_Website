@@ -5,8 +5,7 @@ const AddContact = async (req, res) => {
 const contact = await Contact.create(req.body);
 
     return res.json({
-      message: "lets create contact",
-      fromFrontend:req.body,
+      message: "contact created successfully",
       contact:contact,
       status:true,
     });
