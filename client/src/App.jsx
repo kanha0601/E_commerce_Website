@@ -14,10 +14,11 @@ import Profile from './pages/user/Profile';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import Contact from './pages/public/Contact';
 
+
 // Route Guards
 import ProtectedRoute from './route/ProtectedRoute';
 import PublicRoute from './route/PublicRoute';
-import Product from './pages/public/Product';
+import Products from './pages/public/Products';
 import AdminContact from './pages/admin/AdminContact';
 
 
@@ -30,7 +31,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="product" element={<Product />} />
+        <Route path="products" element={<Products />} />
         
         {/* Only accessible if NOT logged in */}
         <Route 

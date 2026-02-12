@@ -1,73 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Products = () => {
-  // Sample products (for now – later from database)
-  const [products] = useState([
-    {
-      id: 1,
-      name: "Smart Phone",
-      price: 20000,
-      image: "",
-    },
-    {
-      id: 2,
-      name: "Laptop",
-      price: 50000,
-      image: "",
-    },
-    {
-      id: 3,
-      name: "Headphones",
-      price: 2000,
-      image: "",
-    },
-    {
-      id: 4,
-      name: "Smart Watch",
-      price: 3500,
-      image: "",
-    },
-    {
-        id: 5,
-        name: "Bluetooth Speaker",
-        price: 2500,
-        image: "",
-      },
-      {
-        id: 6,
-        name: "Keyboard",
-        price: 1200,
-        image: "",
-      },
-      {
-        id: 7,
-        name: "Mouse",
-        price: 800,
-        image: "",
-      },
-      {
-        id: 8,
-        name: "Power Bank",
-        price: 1800,
-        image: "",
-      },
-      {
-        id: 9,
-        name: "Tablet",
-        price: 22000,
-        image: "",
-      },
-      {
-        id: 10,
-        name: "Camera",
-        price: 32000,
-        image: "",
-      },
-    ]);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/product/get")
+      .then((res) => {
+        console.log(res.data);
+        setProducts(res.data.product); // must match backend key
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className="bg-gray-50 min-h-screen py-10 px-5">
-
       <h1 className="text-4xl font-bold text-center mb-10">
         Our Products 🛍️
       </h1>
@@ -79,12 +26,6 @@ const Products = () => {
             key={product.id}
             className="bg-white rounded-xl shadow hover:shadow-lg transition p-5 text-center"
           >
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-40 object-cover mb-4 rounded"
-            />
-
             <h3 className="text-xl font-semibold mb-2">
               {product.name}
             </h3>

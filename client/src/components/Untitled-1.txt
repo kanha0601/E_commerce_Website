@@ -1,0 +1,4 @@
+git add .
+git commit -m "setup"
+git push origin main
+to install axious- npm i axios
