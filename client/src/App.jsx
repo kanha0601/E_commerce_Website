@@ -20,6 +20,7 @@ import ProtectedRoute from './route/ProtectedRoute';
 import PublicRoute from './route/PublicRoute';
 import Products from './pages/public/Products';
 import AdminContact from './pages/admin/AdminContact';
+import AdminProduct from './pages/admin/AdminProduct';
 
 
 
@@ -66,6 +67,9 @@ function App() {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<AdminDashboard />} />
         <Route path='Contact' element={<AdminContact />} />
+        <Route path='product' element={<AdminProduct />} />
+        <Route path="/admin/productForm" element={<productForm />} />
+
       </Route>
       
       {/* Fallback */}

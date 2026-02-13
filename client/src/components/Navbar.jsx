@@ -15,6 +15,7 @@ const Navbar = () => {
             <Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link>
             <Link to="/about" className="text-gray-700 hover:text-blue-600">About</Link>
             <Link to="/contact" className="text-gray-700 hover:text-blue-600">Contact</Link>
+            <Link to="/product" className="text-gray-700 hover:text-blue-600">Product</Link>
             
             {user ? (
               <>
