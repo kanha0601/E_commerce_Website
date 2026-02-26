@@ -21,6 +21,7 @@ import PublicRoute from './route/PublicRoute';
 import Products from './pages/public/Products';
 import AdminContact from './pages/admin/AdminContact';
 import AdminProduct from './pages/admin/AdminProduct';
+import AdminUsers from './pages/admin/AdminUsers';
 
 
 
@@ -32,7 +33,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="products" element={<Products />} />
+        <Route path="product" element={<Products />} />
         
         {/* Only accessible if NOT logged in */}
         <Route 
@@ -69,6 +70,7 @@ function App() {
         <Route path='Contact' element={<AdminContact />} />
         <Route path='product' element={<AdminProduct />} />
         <Route path="/admin/productForm" element={<productForm />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
 
       </Route>
       
