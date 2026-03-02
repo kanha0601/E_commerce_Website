@@ -2,6 +2,8 @@ import { createContext, useState, useEffect, useContext } from 'react';
 
 const AuthContext = createContext();
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,7 +22,7 @@ export const AuthProvider = ({ children }) => {
   // Login Function
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://localhost:8080/api/auth/login', {
+      const response = await fetch(`${BASE_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -45,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   // Register Function
   const register = async (name, email, password) => {
     try {
-      const response = await fetch('http://localhost:8080/api/auth/register', {
+      const response = await fetch(`${BASE_URL}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),

@@ -9,13 +9,18 @@ const productSchema = new mongoose.Schema(
       type: Number,
     },
     image: {
-      type: String
+      type: String,
     },
-     description: {
-      type: String
-    }
+    description: {
+      type: String,
+    },
+    category: {
+      type: String,
+      enum: ["electronics", "clothing", "footwear", "accessories", "home"],
+      default: "electronics",
+    },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Product", productSchema);
