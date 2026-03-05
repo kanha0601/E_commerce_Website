@@ -363,7 +363,7 @@ const Contact = () => {
                 <div className="ct-info-icon"><IconMapPin /></div>
                 <div>
                   <div className="ct-info-label">Location</div>
-                  <div className="ct-info-value">Mumbai, Maharashtra, India</div>
+                  <div className="ct-info-value">Bhubaneswar, Odisha, India</div>
                 </div>
               </div>
               <div className="ct-info-item">
@@ -377,7 +377,7 @@ const Contact = () => {
                 <div className="ct-info-icon"><IconPhoneBig /></div>
                 <div>
                   <div className="ct-info-label">Call Us</div>
-                  <div className="ct-info-value">+91 98765 43210</div>
+                  <div className="ct-info-value">+91 81149 59593</div>
                 </div>
               </div>
             </div>
