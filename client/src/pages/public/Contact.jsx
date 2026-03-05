@@ -370,7 +370,7 @@ const Contact = () => {
                 <div className="ct-info-icon"><IconMailBig /></div>
                 <div>
                   <div className="ct-info-label">Email Us</div>
-                  <div className="ct-info-value">support@yourstore.com</div>
+                  <div className="ct-info-value">support@GetReady.com</div>
                 </div>
               </div>
               <div className="ct-info-item">
