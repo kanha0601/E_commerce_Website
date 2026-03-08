@@ -25,6 +25,7 @@ const Navbar = () => {
             <Link to="/contact" className="text-gray-700 hover:text-blue-600">Contact</Link>
             <Link to="/product" className="text-gray-700 hover:text-blue-600">Product</Link>
 
+
             {/* CART ICON */}
             <button onClick={() => setOpen(true)} className="relative">
               <ShoppingCart className="w-6 h-6 text-gray-700 hover:text-blue-600" />
@@ -49,7 +50,7 @@ const Navbar = () => {
 
                 {user.role === "admin" && (
                   <Link to="/admin" className="text-blue-600 font-semibold">
-                    Admin Panel
+                    Admin Panel 
                   </Link>
                 )}
 

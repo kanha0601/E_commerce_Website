@@ -33,7 +33,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="product" element={<Products />} />
+        <Route path="products" element={<Products />} />
         
         {/* Only accessible if NOT logged in */}
         <Route 
@@ -67,7 +67,7 @@ function App() {
       {/* Admin Routes with Admin Layout */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<AdminDashboard />} />
-        <Route path='Contact' element={<AdminContact />} />
+        <Route path='contact' element={<AdminContact />} />
         <Route path='product' element={<AdminProduct />} />
         <Route path="/admin/productForm" element={<productForm />} />
         <Route path="/admin/users" element={<AdminUsers />} />
