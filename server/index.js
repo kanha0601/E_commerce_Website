@@ -20,6 +20,8 @@ const contactRoutes = require('./route/contactRoutes');
 const productRoutes = require('./route/ProductRoute');
 const orderRoutes = require('./route/orderRoutes');
 const adminRoutes = require("./route/adminRoutes")
+const priceCompareRoutes = require('./route/priceComparisonRoute');
+
 
 // Mount Routes
 app.use('/api/auth', authRoutes);
@@ -27,6 +29,7 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/order', orderRoutes);
 app.use("/api/admin", adminRoutes);
+app.use('/api/price-compare', priceCompareRoutes);
 
 
 app.get('/', (req, res) => {
