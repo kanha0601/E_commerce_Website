@@ -14,7 +14,6 @@ import Profile from './pages/user/Profile';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import Contact from './pages/public/Contact';
 
-
 // Route Guards
 import ProtectedRoute from './route/ProtectedRoute';
 import PublicRoute from './route/PublicRoute';
@@ -22,6 +21,8 @@ import Products from './pages/public/Products';
 import AdminContact from './pages/admin/AdminContact';
 import AdminProduct from './pages/admin/AdminProduct';
 import AdminUsers from './pages/admin/AdminUsers';
+import AdminOrders from './pages/admin/adminorders';  // ← ADDED
+import Cart from './pages/user/Cart';
 
 
 
@@ -62,11 +63,23 @@ function App() {
             </ProtectedRoute>
           } 
         />
+        <Route 
+          path="cart" 
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          } 
+        />
       </Route>
 
       {/* Admin Routes with Admin Layout */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<AdminDashboard />} />
+        <Route path="contact" element={<AdminContact />} />
+        <Route path="product" element={<AdminProduct />} />
+        <Route path="users" element={<AdminUsers />} />
+        <Route path="orders" element={<AdminOrders />} />  {/* ← ADDED */}
         <Route path='contact' element={<AdminContact />} />
         <Route path='product' element={<AdminProduct />} />
         <Route path="/admin/productForm" element={<productForm />} />
@@ -79,6 +92,5 @@ function App() {
     </Routes>
   );
 }
-
 
 export default App;
