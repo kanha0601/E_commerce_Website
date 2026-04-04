@@ -2,17 +2,42 @@ const Order = require("../model/Order");
 
 exports.createOrder = async (req, res) => {
     try {
-        const { products, totalAmount } = req.body;
+        const { products, totalAmount, shippingAddress, paymentMethod } = req.body;
 
         if (!products || products.length === 0) {
             return res.status(400).json({ message: "Cart is empty" });
         }
+        if (!shippingAddress) {
+            return res.status(400).json({ message: "Shipping address required" });
+        }
+        if (!paymentMethod) {
+            return res.status(400).json({ message: "Payment method required" });
+        }
+
+        // ✅ Transform cart items to match schema: { product: ObjectId, quantity, price }
+        const formattedProducts = products.map(item => ({
+            product: item._id || item.product,
+            quantity: item.quantity || 1,
+            price: item.price,
+        }));
+
+        // ✅ Ensure state field exists (required in schema)
+        const formattedAddress = {
+            ...shippingAddress,
+            state: shippingAddress.state || "N/A",
+        };
+
+        // ✅ Lowercase paymentMethod — schema enum is "cod" / "online"
+        const formattedPaymentMethod = paymentMethod.toLowerCase();
 
         const order = await Order.create({
             user: req.user.id,
-            products,
+            products: formattedProducts,
             totalAmount,
-            status: "pending", // ✅ explicit
+            shippingAddress: formattedAddress,
+            paymentMethod: formattedPaymentMethod,
+            paymentStatus: formattedPaymentMethod === "cod" ? "pending" : "completed",
+            status: "pending",
         });
 
         res.status(201).json({
@@ -20,36 +45,30 @@ exports.createOrder = async (req, res) => {
             message: "Order placed successfully",
             order,
         });
+
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: "Order failed" });
+        console.log("CREATE ORDER ERROR:", error);
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
 exports.getMyOrders = async (req, res) => {
     try {
         const orders = await Order.find({ user: req.user._id })
-            .populate("products.product", "name price")
+            .populate("products.product", "name price images")
             .sort({ createdAt: -1 });
 
-        res.json({
-            success: true,
-            orders,
-        });
+        res.json({ success: true, orders });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message,
-        });
+        res.status(500).json({ success: false, error: error.message });
     }
 };
-
 
 exports.getAllOrders = async (req, res) => {
     try {
         const orders = await Order.find()
             .populate("user", "name email")
-            .populate("products.product", "name price");
+            .populate("products.product", "name price images");
 
         res.json({ success: true, orders });
     } catch (error) {
@@ -69,13 +88,8 @@ exports.updateOrderStatus = async (req, res) => {
         order.status = status;
         await order.save();
 
-        res.json({
-            success: true,
-            message: "Order status updated",
-            order,
-        });
+        res.json({ success: true, message: "Order status updated", order });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
 };
-

@@ -8,8 +8,10 @@ const productSchema = new mongoose.Schema(
     price: {
       type: Number,
     },
+    // ✅ FIXED: simple string URL so frontend can use item.image directly
     image: {
       type: String,
+      default: "",
     },
     description: {
       type: String,
