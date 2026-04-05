@@ -407,11 +407,11 @@ const TEAM = [
     num: "01"
   },
   {
-    name: "Nandita Panigrahi",
+    name: "Nandita Mishra",
     role: "Frontend Developer",
     desc: "Crafts beautiful, responsive user interfaces with attention to detail. Specialises in modern CSS, animations and creating seamless user experiences.",
-    initials: "NP",
-    skills: ["React", "CSS", "UI/UX", "Figma"],
+    initials: "NM",
+    skills: ["React", "CSS", "JavaScript", "HTML"],
     num: "02"
   },
   {

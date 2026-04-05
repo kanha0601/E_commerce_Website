@@ -325,6 +325,18 @@ const Navbar = () => {
         <nav className={`nb-nav ${scrolled ? 'scrolled' : 'top'}`}>
           <div className="nb-inner">
 
+
+
+            {/* CART ICON */}
+            <button onClick={() => setOpen(true)} className="relative">
+              <ShoppingCart className="w-6 h-6 text-gray-700 hover:text-blue-600" />
+              {cart.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 rounded-full">
+                  {cart.length}
+                </span>
+              )}
+              </button>
+
             {/* Logo */}
             <Link to="/" className="nb-logo">
               <span className="nb-logo-main">GET READY</span>
@@ -344,11 +356,27 @@ const Navbar = () => {
                     <Link to="/admin" className="nb-link admin-link">Admin Panel</Link>
                   </li>
                 </>
+
               )}
             </ul>
 
             {/* Right cluster */}
             <div className="nb-right">
+
+
+                {/* ✅ ADD THIS */}
+                <Link
+                  to="/profile"
+                  className="text-gray-700 hover:text-blue-600"
+                >
+                  Profile
+                </Link>
+
+                {user?.role === "admin" && (
+                  <Link to="/admin" className="text-blue-600 font-semibold">
+                    Admin Panel 
+                  </Link>
+                )}
 
               {/* Cart */}
               <button className="nb-cart-btn" onClick={() => setCartOpen(true)}>
@@ -363,7 +391,7 @@ const Navbar = () => {
               {user ? (
                 <>
                   <span className="nb-greeting">
-                    Hi, <strong>{user.name?.split(' ')[0]}</strong>
+                    Hi, <strong>{user?.name?.split(' ')[0]}</strong>
                   </span>
                   <NavLink to="/profile">Profile</NavLink>
                   <button className="nb-logout-btn" onClick={logout}>Logout</button>

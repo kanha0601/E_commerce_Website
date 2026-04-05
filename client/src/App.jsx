@@ -34,7 +34,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="product" element={<Products />} />
+        <Route path="products" element={<Products />} />
         
         {/* Only accessible if NOT logged in */}
         <Route 
@@ -80,6 +80,11 @@ function App() {
         <Route path="product" element={<AdminProduct />} />
         <Route path="users" element={<AdminUsers />} />
         <Route path="orders" element={<AdminOrders />} />  {/* ← ADDED */}
+        <Route path='contact' element={<AdminContact />} />
+        <Route path='product' element={<AdminProduct />} />
+        <Route path="/admin/productForm" element={<productForm />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
+
       </Route>
       
       {/* Fallback */}
