@@ -6,7 +6,7 @@ const AddProduct = async (req, res) => {
     try {
         let imageUrl = "";
 
-        // ✅ Upload single image to Cloudinary
+        // ✅ If file uploaded — upload to Cloudinary
         if (req.file) {
             const uploadToCloudinary = () => {
                 return new Promise((resolve, reject) => {
@@ -23,6 +23,11 @@ const AddProduct = async (req, res) => {
             imageUrl = result.secure_url;
         }
 
+        // ✅ If image URL provided directly
+        if (!imageUrl && req.body.image) {
+            imageUrl = req.body.image;
+        }
+
         if (!imageUrl) {
             return res.json({ status: false, message: "Image required" });
         }
@@ -31,7 +36,7 @@ const AddProduct = async (req, res) => {
             name: req.body.name,
             price: req.body.price,
             description: req.body.description,
-            image: imageUrl, // ✅ single string
+            image: imageUrl,
             category: req.body.category || "electronics",
         });
 
@@ -76,7 +81,7 @@ const updateProduct = async (req, res) => {
             category: req.body.category,
         };
 
-        // ✅ Update image if new one uploaded
+        // ✅ If new file uploaded
         if (req.file) {
             const uploadToCloudinary = () => {
                 return new Promise((resolve, reject) => {
@@ -91,6 +96,11 @@ const updateProduct = async (req, res) => {
             };
             const result = await uploadToCloudinary();
             updateData.image = result.secure_url;
+        }
+
+        // ✅ If image URL provided directly
+        if (!req.file && req.body.image) {
+            updateData.image = req.body.image;
         }
 
         const updated = await product.findByIdAndUpdate(
