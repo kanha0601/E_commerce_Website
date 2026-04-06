@@ -13,18 +13,17 @@ import Register from './pages/public/Register';
 import Profile from './pages/user/Profile';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import Contact from './pages/public/Contact';
-
-// Route Guards
-import ProtectedRoute from './route/ProtectedRoute';
-import PublicRoute from './route/PublicRoute';
+import Checkout from './pages/public/Checkout';
 import Products from './pages/public/Products';
 import AdminContact from './pages/admin/AdminContact';
 import AdminProduct from './pages/admin/AdminProduct';
 import AdminUsers from './pages/admin/AdminUsers';
-import AdminOrders from './pages/admin/adminorders';  // ← ADDED
+import AdminOrders from './pages/admin/adminorders';
 import Cart from './pages/user/Cart';
 
-
+// Route Guards
+import ProtectedRoute from './route/ProtectedRoute';
+import PublicRoute from './route/PublicRoute';
 
 function App() {
   return (
@@ -34,43 +33,16 @@ function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="products" element={<Products />} />
-        
+        <Route path="product" element={<Products />} />
+        <Route path="Checkout" element={<Checkout />} />
+
         {/* Only accessible if NOT logged in */}
-        <Route 
-          path="login" 
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          } 
-        />
-        <Route 
-          path="register" 
-          element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
-          } 
-        />
-        
+        <Route path="login" element={<PublicRoute><Login /></PublicRoute>} />
+        <Route path="register" element={<PublicRoute><Register /></PublicRoute>} />
+
         {/* Only accessible if logged in */}
-        <Route 
-          path="profile" 
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="cart" 
-          element={
-            <ProtectedRoute>
-              <Cart />
-            </ProtectedRoute>
-          } 
-        />
+        <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
       </Route>
 
       {/* Admin Routes with Admin Layout */}
@@ -79,14 +51,9 @@ function App() {
         <Route path="contact" element={<AdminContact />} />
         <Route path="product" element={<AdminProduct />} />
         <Route path="users" element={<AdminUsers />} />
-        <Route path="orders" element={<AdminOrders />} />  {/* ← ADDED */}
-        <Route path='contact' element={<AdminContact />} />
-        <Route path='product' element={<AdminProduct />} />
-        <Route path="/admin/productForm" element={<productForm />} />
-        <Route path="/admin/users" element={<AdminUsers />} />
-
+        <Route path="orders" element={<AdminOrders />} />
       </Route>
-      
+
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
