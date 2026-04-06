@@ -319,7 +319,7 @@ const IconBag = () => (
   </svg>
 );
 
-const Checkout = () => {
+const CheckOut = () => {
   const navigate = useNavigate();
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -527,4 +527,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default CheckOut;
