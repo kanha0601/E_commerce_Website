@@ -13,15 +13,12 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-
 // Routes
 const authRoutes = require('./route/authRoutes');
 const contactRoutes = require('./route/contactRoutes');
 const productRoutes = require('./route/ProductRoute');
 const orderRoutes = require('./route/orderRoutes');
-const adminRoutes = require("./route/adminRoutes")
-const priceCompareRoutes = require('./route/priceComparisonRoute');
-
+const adminRoutes = require("./route/adminRoutes");
 
 // Mount Routes
 app.use('/api/auth', authRoutes);
@@ -29,8 +26,6 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/order', orderRoutes);
 app.use("/api/admin", adminRoutes);
-app.use('/api/price-compare', priceCompareRoutes);
-
 
 app.get('/', (req, res) => {
   res.send('API is running...');
