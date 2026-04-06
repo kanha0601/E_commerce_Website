@@ -13,7 +13,7 @@ import Register from './pages/public/Register';
 import Profile from './pages/user/Profile';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import Contact from './pages/public/Contact';
-
+import Checkout from './pages/public/Checkout';
 import Products from './pages/public/Products';
 import AdminContact from './pages/admin/AdminContact';
 import AdminProduct from './pages/admin/AdminProduct';
