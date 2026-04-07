@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useCart } from "../../context/CartContext";
 import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -243,6 +244,7 @@ const Products = () => {
   const [category, setCategory] = useState('all');
   const [added, setAdded]       = useState({});
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   // fetch all products once for tab counts
   useEffect(() => {
@@ -360,7 +362,7 @@ const Products = () => {
                 key={product._id}
                 className="prod-card"
                 style={{ animationDelay: `${Math.min(idx, 8) * 0.06}s` }}
-              >
+                 onClick={() => navigate(`/product/${product._id}`)}              >
                 <div className="prod-img-wrap">
                   <img
                     src={product.image}

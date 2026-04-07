@@ -20,6 +20,7 @@ import AdminProduct from './pages/admin/AdminProduct';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminOrders from './pages/admin/adminorders';
 import Cart from './pages/user/Cart';
+import ProductDetail from './pages/public/ProductDetail';
 
 // Route Guards
 import ProtectedRoute from './route/ProtectedRoute';
@@ -35,6 +36,7 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="product" element={<Products />} />
         <Route path="Checkout" element={<Checkout />} />
+        <Route path="product/:id" element={<ProductDetail />} />
 
         {/* Only accessible if NOT logged in */}
         <Route path="login" element={<PublicRoute><Login /></PublicRoute>} />
