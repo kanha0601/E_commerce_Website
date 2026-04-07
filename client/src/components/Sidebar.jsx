@@ -298,7 +298,7 @@ const NAV_ITEMS = [
   { to: '/admin/contact', label: 'Messages',  icon: <IconMail  /> },
   { to: '/admin/product', label: 'Products',  icon: <IconBox   /> },
   { to: '/admin/users',   label: 'Users',     icon: <IconUsers /> },
-  { to: '/admin/Orders',   label: 'orders',     icon: <IconUsers /> },
+  { to: '/admin/Orders',   label: 'orders',     icon: <IconBox /> },
 ];
 
 const Sidebar = () => {
