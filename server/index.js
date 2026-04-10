@@ -15,7 +15,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
-app.options('*', cors()); // Handle preflight for all routes
+app.options('/(.*)', cors()); // Handle preflight for all routes
 app.use(express.json());
 
 // Routes
