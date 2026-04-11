@@ -68,6 +68,8 @@ const DeleteContact = async (req, res) => {
   }
 };
 
+const { Resend } = require('resend');
+
 const ReplyContact = async (req, res) => {
   try {
     const { email, name, replyMessage } = req.body;
@@ -76,18 +78,12 @@ const ReplyContact = async (req, res) => {
       return res.json({ status: false, message: "Email and message are required" });
     }
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
-      },
-    });
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
-    await transporter.sendMail({
-      from: `"Admin Support" <${process.env.GMAIL_USER}>`,
+    await resend.emails.send({
+      from: 'onboarding@resend.dev', // ← use this until you verify a domain
       to: email,
-      subject: `Reply to your message`,
+      subject: 'Reply to your message',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f9f9f9; padding: 32px; border-radius: 8px;">
           <div style="background: #03060f; padding: 24px; border-radius: 6px; margin-bottom: 24px;">
@@ -96,7 +92,7 @@ const ReplyContact = async (req, res) => {
           <p style="color: #333; font-size: 15px; line-height: 1.7;">Hello <strong>${name}</strong>,</p>
           <p style="color: #555; font-size: 15px; line-height: 1.8;">${replyMessage}</p>
           <hr style="border: none; border-top: 1px solid #eee; margin: 28px 0;" />
-          <p style="color: #999; font-size: 12px;">This is a reply to your contact form submission. Please do not reply to this email directly.</p>
+          <p style="color: #999; font-size: 12px;">This is a reply to your contact form submission.</p>
         </div>
       `,
     });
