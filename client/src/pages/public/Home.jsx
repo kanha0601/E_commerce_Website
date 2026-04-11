@@ -563,7 +563,7 @@ const Home = () => {
           <div className="hr-badge hr-badge-2">New Arrivals ✦</div>
           <div className="hr-badge hr-badge-3">Free Shipping</div>
 
-          <div className="hr-vert-text">GET READY — FASHION REDEFINED — 2024</div>
+          <div className="hr-vert-text">NEXOVA — FASHION REDEFINED — 2024</div>
         </div>
 
       </section>

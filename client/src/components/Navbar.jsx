@@ -184,8 +184,8 @@ const Navbar = () => {
 
             {/* Logo */}
             <Link to="/" className="nb-logo">
-              <span className="nb-logo-main">GET READY</span>
-              <span className="nb-logo-sub">Premium Store</span>
+              <span className="nb-logo-main">NEXOVA</span>
+              <span className="nb-logo-sub">World</span>
             </Link>
 
             {/* Center links */}

@@ -313,7 +313,7 @@ const Sidebar = () => {
         {/* ── HEADER ── */}
         <div className="sb-header">
           <div className="sb-header-tag">Control Panel</div>
-          <div className="sb-brand">GET<span>_</span>READY</div>
+          <div className="sb-brand">NEX<span>_</span>OVA</div>
           <div className="sb-brand-sub">Admin System v1.0</div>
         </div>
 

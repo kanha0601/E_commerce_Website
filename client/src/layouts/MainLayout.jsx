@@ -93,9 +93,9 @@ const MainLayout = () => {
 
         {/* ── FOOTER ── */}
         <footer className="ml-footer">
-          <div className="ml-footer-brand">Get Ready</div>
+          <div className="ml-footer-brand">NEXOVA</div>
           <div className="ml-footer-copy">
-            © {new Date().getFullYear()} Get Ready
+            © {new Date().getFullYear()}NEXOVA
             <span className="ml-footer-rule" />
             All rights reserved
           </div>

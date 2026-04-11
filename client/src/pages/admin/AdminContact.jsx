@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
-import { Trash2 } from "lucide-react";
+import { Trash2, Reply } from "lucide-react";
 
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap');
@@ -13,22 +13,17 @@ const css = `
     position: relative;
     overflow-x: hidden;
   }
-
-  /* dot grid */
   .ac-wrap::before {
     content: '';
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
     background-image: radial-gradient(circle, rgba(56,139,253,.18) 1px, transparent 1px);
     background-size: 28px 28px; opacity: .3;
   }
-  /* glow */
   .ac-wrap::after {
     content: '';
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
     background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(14,99,233,.07) 0%, transparent 70%);
   }
-
-  /* ── STATUS BAR ── */
   .ac-statusbar {
     position: relative; z-index: 2;
     display: flex; align-items: center; justify-content: space-between;
@@ -47,14 +42,11 @@ const css = `
   }
   @keyframes acPulse { 0%,100%{opacity:1} 50%{opacity:.3} }
   .ac-status-right { color: rgba(56,139,253,.5); font-size: .54rem; }
-
   .ac-inner {
     position: relative; z-index: 1;
     max-width: 1100px; margin: 0 auto;
     padding: 40px 28px 100px;
   }
-
-  /* ── HEADER ── */
   .ac-header {
     display: flex; align-items: flex-end;
     justify-content: space-between; flex-wrap: wrap;
@@ -63,11 +55,9 @@ const css = `
     animation: acUp .6s cubic-bezier(.16,1,.3,1) both;
   }
   @keyframes acUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-
   .ac-eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
   .ac-eyebrow-line { height: 1px; width: 24px; background: linear-gradient(90deg,#388bfd,transparent); }
   .ac-eyebrow-text { font-size: .56rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(56,139,253,.6); }
-
   .ac-title {
     font-family: 'Syne', sans-serif;
     font-size: clamp(1.6rem, 3.5vw, 2.2rem);
@@ -76,7 +66,6 @@ const css = `
   }
   .ac-title span { color: transparent; -webkit-text-stroke: 1px rgba(56,139,253,.45); }
   .ac-count { font-size: .56rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(168,196,224,.3); margin-top: 6px; }
-
   .ac-badge {
     display: inline-flex; align-items: center; gap: 6px;
     background: rgba(56,139,253,.08); border: 1px solid rgba(56,139,253,.25);
@@ -89,8 +78,6 @@ const css = `
     background: #388bfd; box-shadow: 0 0 6px rgba(56,139,253,.8);
     animation: acPulse 2s ease infinite;
   }
-
-  /* ── TOOLBAR ── */
   .ac-toolbar {
     display: flex; align-items: center; gap: 10px;
     margin-bottom: 16px; flex-wrap: wrap;
@@ -114,8 +101,6 @@ const css = `
     font-size: .58rem; letter-spacing: .12em; text-transform: uppercase;
     color: rgba(168,196,224,.25); margin-left: auto;
   }
-
-  /* ── TABLE WRAP ── */
   .ac-table-wrap {
     border: 1px solid rgba(56,139,253,.12);
     background: rgba(3,6,15,.85);
@@ -127,10 +112,7 @@ const css = `
     position: absolute; top: 0; left: 0; right: 0; height: 1px;
     background: linear-gradient(90deg, #388bfd, rgba(56,139,253,.3), transparent);
   }
-
-  /* ── TABLE ── */
   .ac-table { width: 100%; border-collapse: collapse; min-width: 700px; }
-
   .ac-table thead tr { border-bottom: 1px solid rgba(56,139,253,.12); }
   .ac-table thead th {
     padding: 13px 18px; text-align: left;
@@ -139,7 +121,6 @@ const css = `
     background: rgba(56,139,253,.04); white-space: nowrap;
   }
   .ac-table thead th:last-child { text-align: center; }
-
   .ac-table tbody tr {
     border-bottom: 1px solid rgba(56,139,253,.06);
     transition: background .2s;
@@ -148,26 +129,16 @@ const css = `
   .ac-table tbody tr:last-child { border-bottom: none; }
   .ac-table tbody tr:hover { background: rgba(56,139,253,.04); }
   .ac-table td { padding: 15px 18px; vertical-align: top; }
-
-  /* index */
   .ac-cell-idx { font-size: .52rem; letter-spacing: .14em; color: rgba(56,139,253,.3); }
-
-  /* name */
   .ac-cell-name {
     font-family: 'Syne', sans-serif;
     font-size: .88rem; font-weight: 700;
     color: #e8f4ff; letter-spacing: -.01em; white-space: nowrap;
   }
-
-  /* email */
   .ac-cell-email { font-size: .72rem; font-weight: 300; color: rgba(168,196,224,.45); }
   .ac-cell-email a { color: inherit; text-decoration: none; transition: color .2s; }
   .ac-cell-email a:hover { color: #388bfd; }
-
-  /* phone */
   .ac-cell-phone { font-size: .72rem; font-weight: 300; color: rgba(168,196,224,.4); white-space: nowrap; }
-
-  /* message */
   .ac-cell-msg {
     font-size: .72rem; font-weight: 300; color: rgba(168,196,224,.4);
     line-height: 1.65; max-width: 300px;
@@ -184,11 +155,10 @@ const css = `
     transition: color .2s;
   }
   .ac-read-more:hover { color: #79b8ff; }
-
-  /* delete */
+  .ac-action-btns { display: flex; align-items: center; justify-content: center; gap: 8px; }
   .ac-del-btn {
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto; width: 32px; height: 32px;
+    width: 32px; height: 32px;
     border: 1px solid rgba(239,68,68,.2); background: rgba(239,68,68,.06);
     color: rgba(239,68,68,.55); cursor: pointer;
     transition: background .2s, border-color .2s, color .2s, transform .2s;
@@ -197,8 +167,17 @@ const css = `
     background: rgba(239,68,68,.14); border-color: rgba(239,68,68,.5);
     color: #f87171; transform: scale(1.08);
   }
-
-  /* ── EMPTY ── */
+  .ac-reply-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px;
+    border: 1px solid rgba(56,139,253,.2); background: rgba(56,139,253,.06);
+    color: rgba(56,139,253,.55); cursor: pointer;
+    transition: background .2s, border-color .2s, color .2s, transform .2s;
+  }
+  .ac-reply-btn:hover {
+    background: rgba(56,139,253,.14); border-color: rgba(56,139,253,.5);
+    color: #79b8ff; transform: scale(1.08);
+  }
   .ac-empty {
     text-align: center; padding: 72px 24px;
     border: 1px solid rgba(56,139,253,.07);
@@ -211,16 +190,12 @@ const css = `
     color: rgba(56,139,253,.07); line-height: 1; margin-bottom: 12px;
   }
   .ac-empty p { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(168,196,224,.2); }
-
-  /* ── SKELETON ── */
   @keyframes skel { 0%{background-position:-400px 0} 100%{background-position:400px 0} }
   .skel {
     background: linear-gradient(90deg,
       rgba(56,139,253,.03) 25%, rgba(56,139,253,.08) 50%, rgba(56,139,253,.03) 75%);
     background-size: 800px 100%; animation: skel 1.4s infinite linear; border-radius: 1px;
   }
-
-  /* ── CONFIRM MODAL ── */
   .ac-modal-overlay {
     position: fixed; inset: 0; z-index: 200;
     background: rgba(3,6,15,.85); backdrop-filter: blur(4px);
@@ -237,14 +212,6 @@ const css = `
     content: '';
     position: absolute; top: 0; left: 0; right: 0; height: 1px;
     background: linear-gradient(90deg, transparent, rgba(239,68,68,.6), transparent);
-  }
-  /* corner bracket */
-  .ac-modal::after {
-    content: '';
-    position: absolute; bottom: 0; right: 0;
-    width: 12px; height: 12px;
-    border-bottom: 1px solid rgba(56,139,253,.3);
-    border-right: 1px solid rgba(56,139,253,.3);
   }
   .ac-modal-icon {
     width: 42px; height: 42px; border: 1px solid rgba(239,68,68,.3);
@@ -274,8 +241,55 @@ const css = `
     padding: 10px; cursor: pointer; transition: opacity .2s, transform .2s;
   }
   .ac-modal-confirm:hover { opacity: .85; transform: translateY(-1px); }
-
-  /* ── TOAST ── */
+  .ac-reply-modal {
+    background: #070b14; border: 1px solid rgba(56,139,253,.18);
+    padding: 36px; max-width: 480px; width: 100%;
+    position: relative; animation: acUp .35s cubic-bezier(.16,1,.3,1) both;
+  }
+  .ac-reply-modal::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, #388bfd, rgba(56,139,253,.3), transparent);
+  }
+  .ac-reply-modal h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700; color: #e8f4ff; margin-bottom: 4px;
+  }
+  .ac-reply-to {
+    font-size: .62rem; color: rgba(56,139,253,.55);
+    letter-spacing: .08em; margin-bottom: 20px; line-height: 1.6;
+  }
+  .ac-reply-original {
+    background: rgba(56,139,253,.04); border-left: 2px solid rgba(56,139,253,.25);
+    padding: 10px 14px; margin-bottom: 16px;
+    font-size: .68rem; font-weight: 300; color: rgba(168,196,224,.35); line-height: 1.65;
+  }
+  .ac-reply-textarea {
+    width: 100%; box-sizing: border-box;
+    background: rgba(56,139,253,.05); border: 1px solid rgba(56,139,253,.15);
+    color: #a8c4e0; font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; font-weight: 300;
+    padding: 12px; outline: none; resize: vertical; min-height: 130px;
+    transition: border-color .25s, box-shadow .25s; margin-bottom: 16px;
+  }
+  .ac-reply-textarea:focus { border-color: rgba(56,139,253,.5); box-shadow: 0 0 0 3px rgba(56,139,253,.07); }
+  .ac-reply-textarea::placeholder { color: rgba(168,196,224,.2); }
+  .ac-reply-btns { display: flex; gap: 8px; }
+  .ac-reply-cancel {
+    flex: 1; background: none; border: 1px solid rgba(168,196,224,.12);
+    color: rgba(168,196,224,.4); font-family: 'JetBrains Mono', monospace;
+    font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+    padding: 10px; cursor: pointer; transition: border-color .2s, color .2s;
+  }
+  .ac-reply-cancel:hover { border-color: rgba(168,196,224,.35); color: #a8c4e0; }
+  .ac-reply-send {
+    flex: 2; background: rgba(56,139,253,.15); border: 1px solid rgba(56,139,253,.4);
+    color: #79b8ff; font-family: 'JetBrains Mono', monospace;
+    font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+    padding: 10px; cursor: pointer; transition: background .2s, box-shadow .2s;
+  }
+  .ac-reply-send:hover { background: rgba(56,139,253,.25); box-shadow: 0 0 16px rgba(56,139,253,.15); }
+  .ac-reply-send:disabled { opacity: .4; cursor: not-allowed; }
   .ac-toast {
     position: fixed; bottom: 28px; left: 50%;
     transform: translateX(-50%) translateY(60px);
@@ -329,11 +343,14 @@ const MessageCell = ({ text }) => {
 };
 
 function AdminContact() {
-  const [contact,   setContact]   = useState([]);
-  const [loading,   setLoading]   = useState(true);
-  const [search,    setSearch]    = useState('');
-  const [confirmId, setConfirmId] = useState(null);
-  const [toast,     setToast]     = useState({ show: false, msg: '', error: false });
+  const [contact,      setContact]      = useState([]);
+  const [loading,      setLoading]      = useState(true);
+  const [search,       setSearch]       = useState('');
+  const [confirmId,    setConfirmId]    = useState(null);
+  const [replyTarget,  setReplyTarget]  = useState(null);
+  const [replyMsg,     setReplyMsg]     = useState('');
+  const [replySending, setReplySending] = useState(false);
+  const [toast,        setToast]        = useState({ show: false, msg: '', error: false });
   const time = useClock();
 
   const fetchContact = async () => {
@@ -364,6 +381,30 @@ function AdminContact() {
     } catch (err) {
       console.log(err);
       showToast('Failed to delete contact', true);
+    }
+  };
+
+  const handleReply = async () => {
+    if (!replyMsg.trim()) return;
+    setReplySending(true);
+    try {
+      const res = await api.post('/contact/reply', {
+        email: replyTarget.email,
+        name:  replyTarget.name,
+        replyMessage: replyMsg,
+      });
+      if (res.data.status) {
+        showToast('Reply sent successfully!');
+        setReplyTarget(null);
+        setReplyMsg('');
+      } else {
+        showToast(res.data.message || 'Failed to send reply', true);
+      }
+    } catch (err) {
+      console.log(err);
+      showToast('Failed to send reply', true);
+    } finally {
+      setReplySending(false);
     }
   };
 
@@ -439,7 +480,7 @@ function AdminContact() {
                 <tbody>
                   {[1,2,3,4].map(i => (
                     <tr key={i}>
-                      {[20,90,150,80,220,32].map((w,j) => (
+                      {[20,90,150,80,220,60].map((w,j) => (
                         <td key={j} style={{ padding:'16px 18px' }}>
                           <div className="skel" style={{ height:11, width:w }} />
                         </td>
@@ -484,14 +525,23 @@ function AdminContact() {
                       </td>
                       <td><div className="ac-cell-phone">{ele.phone}</div></td>
                       <td><MessageCell text={ele.message} /></td>
-                      <td style={{ textAlign:'center' }}>
-                        <button
-                          className="ac-del-btn"
-                          onClick={() => setConfirmId(ele._id)}
-                          title="Delete message"
-                        >
-                          <Trash2 size={14} />
-                        </button>
+                      <td>
+                        <div className="ac-action-btns">
+                          <button
+                            className="ac-reply-btn"
+                            onClick={() => { setReplyTarget(ele); setReplyMsg(''); }}
+                            title="Reply via email"
+                          >
+                            <Reply size={14} />
+                          </button>
+                          <button
+                            className="ac-del-btn"
+                            onClick={() => setConfirmId(ele._id)}
+                            title="Delete message"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -503,7 +553,7 @@ function AdminContact() {
         </div>
       </div>
 
-      {/* CONFIRM MODAL */}
+      {/* DELETE CONFIRM MODAL */}
       {confirmId && (
         <div className="ac-modal-overlay" onClick={() => setConfirmId(null)}>
           <div className="ac-modal" onClick={e => e.stopPropagation()}>
@@ -513,6 +563,39 @@ function AdminContact() {
             <div className="ac-modal-btns">
               <button className="ac-modal-cancel" onClick={() => setConfirmId(null)}>Cancel</button>
               <button className="ac-modal-confirm" onClick={handleDelete}>Delete</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* REPLY MODAL */}
+      {replyTarget && (
+        <div className="ac-modal-overlay" onClick={() => setReplyTarget(null)}>
+          <div className="ac-reply-modal" onClick={e => e.stopPropagation()}>
+            <h3>Reply to Message</h3>
+            <div className="ac-reply-to">
+              → {replyTarget.name} &nbsp;·&nbsp; {replyTarget.email}
+            </div>
+            <div className="ac-reply-original">
+              {replyTarget.message}
+            </div>
+            <textarea
+              className="ac-reply-textarea"
+              placeholder="Type your reply here…"
+              value={replyMsg}
+              onChange={e => setReplyMsg(e.target.value)}
+            />
+            <div className="ac-reply-btns">
+              <button className="ac-reply-cancel" onClick={() => setReplyTarget(null)}>
+                Cancel
+              </button>
+              <button
+                className="ac-reply-send"
+                onClick={handleReply}
+                disabled={replySending || !replyMsg.trim()}
+              >
+                {replySending ? 'Sending…' : '✉ Send Reply'}
+              </button>
             </div>
           </div>
         </div>
